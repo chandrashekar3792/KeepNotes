@@ -36,16 +36,30 @@ var command = argv._[0];
 // console.log('command',command);
 console.log('Yargs',argv);
 if(command==='add'){
-  note.addNote(argv.title,argv.body);
+    var addNote= note.addNote(argv.title,argv.body);
+    if(addNote){
+      console.log('Note created');
+      note.logNote(addNote);
+    }else{
+      console.log('Already same title is exists');
+    }
+
 }else if(command==='list'){
     // console.log('Listing all the notes');
     note.getAll();
 }else if(command==='read'){
     // console.log('Showing single note');
-    note.readNote(argv.title);
+  var readNote= note.readNote(argv.title);
+  if(readNote){
+    note.logNote(readNote);
+  }else{
+    console.log(`Title:${argv.title} not found in notes`);
+  }
 }else if(command==='remove'){
     // console.log('removing note');
-    note.removeNote(argv.title);
+    var noteRemoved=note.removeNote(argv.title);
+    var message=noteRemoved ? 'Note was removed':'Note not found';
+    console.log(message);
 }else{
   console.log('command not found');
 }
