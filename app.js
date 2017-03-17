@@ -30,7 +30,30 @@ const yargs=require('yargs');
 //
 // var filteredArray=_.uniq(['Chandru',1,'Chandru',1,2,3,4]);
 // console.log(filteredArray);
-const argv = yargs.argv;
+const titleOptions={
+  describe:'Title of the note',
+  demand:true,
+  alias:'t'
+};
+const boyOptions={
+    describe:'Body of the note',
+    demand:true,
+    alias:'b'
+};
+const argv = yargs
+            .command('add','Add a new note',{
+              title:titleOptions,
+              body:boyOptions
+            })
+            .command('remove','Remove a  note',{
+              title:titleOptions
+            })
+            .command('read','Read a particular a  note',{
+              title:titleOptions
+            })
+            .command('list','List all  note')
+            .help()
+            .argv;
 // console.log(',process.argvprocess.argv',process.argv);
 var command = argv._[0];
 // console.log('command',command);
@@ -46,7 +69,13 @@ if(command==='add'){
 
 }else if(command==='list'){
     // console.log('Listing all the notes');
-    note.getAll();
+  var allNote=note.getAll();
+  if(allNote){
+    console.log(`Printing ${allNote.length} note(s).`);
+    allNote.forEach((notes) => note.logNote(notes));
+  }else{
+    console.log('No Notes');
+  }
 }else if(command==='read'){
     // console.log('Showing single note');
   var readNote= note.readNote(argv.title);

@@ -34,7 +34,8 @@ var addNote = (title,body)=>{
 }
 
 var getAll = () =>{
-  console.log(`Showing All notes`);
+  // console.log(`Showing All notes`);
+  return fetchNotes();
 }
 
 var removeNote = (title)=>{
