@@ -14,7 +14,9 @@ var addNote = (title,body)=>{
 var getAll = () =>{
   console.log(`Showing All notes`);
 }
-
+var removeNote =function(title){
+    console.log(`Removed ${title} note`);
+}
 var removeNote = (title)=>{
   console.log(`Removed ${title} note`);
 }
